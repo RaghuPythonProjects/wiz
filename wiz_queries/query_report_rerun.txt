@@ -1,0 +1,90 @@
+    mutation RerunReport($reportId: ID!) {
+      rerunReport(input: {id: $reportId}) {
+        report {
+          id
+          lastRun {
+            ...LastRunDetails
+          }
+        }
+      }
+    }
+
+        fragment LastRunDetails on ReportRun {
+      id
+      status
+      failedReason
+      runAt
+      progress
+      results {
+        ... on ReportRunResultsBenchmark {
+          errorCount
+          passedCount
+          failedCount
+          scannedCount
+        }
+        ... on ReportRunResultsHostConfiguration {
+          errorCount
+          passedCount
+          failedCount
+          ignoredCount
+        }
+        ... on ReportRunResultsGraphQuery {
+          resultCount
+          entityCount
+        }
+        ... on ReportRunResultsNetworkExposure {
+          scannedCount
+          publiclyAccessibleCount
+
+        }
+        ... on ReportRunResultsConfigurationFindings {
+          findingsCount
+        }
+        ... on ReportRunResultsVulnerabilities {
+          count
+        }
+        ... on ReportRunResultsIssues {
+          count
+        }
+        ... on ReportRunResultsCloudResource {
+          count
+          limitReached
+        }
+        ... on ReportRunResultsDataScan {
+          count
+        }
+        ... on ReportRunResultsSecretInstances {
+          count
+        }
+        ... on ReportRunResultsCloudEntitlements {
+          count
+          identitiesCount
+          resourcesCount
+        }
+        ... on ReportRunResultsSystemActivity {
+          count
+        }
+        ... on ReportRunResultsSBOM {
+          count
+          failedCount
+
+        }
+        ... on ReportRunResultsSBOMArtifactSearch {
+          count
+        }
+        ... on ReportRunResultsAuditLog {
+          count
+        }
+        ... on ReportRunResultsRuntimeExecutionData {
+          count
+        }
+        ... on ReportRunResultsCloudEntitlements {
+          count
+          identitiesCount
+          resourcesCount
+        }
+        ... on ReportRunResultsEndpointAttackSurface {
+          count
+        }
+      }
+    }

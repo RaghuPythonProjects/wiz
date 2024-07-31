@@ -1,0 +1,7 @@
+    query ReportDownloadUrl($reportId: ID!) {
+      report(id: $reportId) {
+        lastRun {
+          url
+        }
+      }
+    }
